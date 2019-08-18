@@ -1,6 +1,16 @@
 # Optical Sequencing Data Analysis Apps
 This set of five MATLAB apps is for guided data analysis of optical sequencing experiments. From raw Raman spectrosocpy measurements, these apps are used for determining content in DNA gene blocks and applying bioinformatic tools for gene identification. Prior to use of these apps, two sets of Raman spectroscopy measurements should have been collected: (1) calibration blocks and (2) gene blocks.
 
+Within the 'Sample FASTA databases' folder, there are four FASTA files available for running with App 5...
+1. The MEGARes antibiotic resistance database
+Lakin, S. M.; Dean, C.; Noyes, N. R.; Dettenwanger, A.; Ross, A. S.; Doster, E.; Rovira, P.; Abdo, Z.; Jones, K. L.; Ruiz, J.; et al. MEGARes: An Antimicrobial Resistance Database for High Throughput Sequencing. Nucleic Acids Res. 2017, 45 (D1), D574–D580.
+2. The COSMIC cancer database
+Forbes, S. A.; Beare, D.; Gunasekaran, P.; Leung, K.; Bindal, N.; Boutselakis, H.; Ding, M.; Bamford, S.; Cole, C.; Ward, S.; et al. COSMIC: Exploring the World’s Knowledge of Somatic Mutations in Human Cancer. Nucleic Acids Res. 2015, 43 (D1), D805–D811.
+3. A custom compiled database of other genetic diseases
+Inspired by the NIH Undiagnosed Diseases Network
+4. The Pseudomonas aeruginosa PAO1 genome (with an OXA class D beta-lactamase gene from the MEGARes database inserted)
+Stover, C. K.; Pham, X. Q.; Erwin, A. L.; Mizoguchi, S. D.; Warrener, P.; Hickey, M. J.; Brinkman, F. S. L.; Hufnagle, W. O.; Kowalik, D. J.; Lagrou, M.; et al. Complete Genome Sequence of Pseudomonas Aeruginosa PAO1, an Opportunistic Pathogen. Nature 2000, 406, 959–964.
+
 Input/output requirements for using the apps are as follows...
 
 App 1: Signal Processing and Normalization ----------------------------------------
@@ -16,14 +26,14 @@ Inputs: Output from App 1.
 Outputs: The output filename is ‘(Calibration or gene) blocks intensities.xlsx’. It has tree tabs with information and data. Sample names with one per consecutive row are on tab ‘SampleNames’. Mean intensity values (averaged from each of the replicates) are on tab ‘Intensities_mean’ with one sample per consecutive row corresponding to their names, and four columns – one for each of the nucleobases in the order A-G-C-T. Standard deviation of intensity values (deviations from each of the replicates) are on tab ‘Intensities_std’ with one sample per consecutive row corresponding to their names, and four columns – one for each of the nucleobases in the order A-G-C-T.
 
 App 3: Calibrations ----------------------------------------
-* Note this app is only run on the calibration blocks, not the gene blocks
+Note this app is only run on the calibration blocks, not the gene blocks
 
 Inputs: There are two inputs for this app. The first input is the calibration key (i.e., the actual contents of the calibration blocks). The user must generate and format this file according to specifications. This file must be an Excel .xls or .xlsx type. The file has two tabs with information and data. Sample names with one per consecutive row are on tab ‘SampleNames’. The content of the samples are on tab ‘Key’ with one sample per consecutive row corresponding to their names, and four columns – one for each of the nucleobases in the order A-G-C-T. The second input is the output from App 2 (for calibration blocks).
 
 Outputs: The output filename is ‘Calibrations.xlsx’. The only data used from the calibrations in the next apps is the ‘AvgFits’ tab. It has the calibration data for each nucleobase in consecutive columns. The first row is the slope, and the second row is the intercept (all intercepts will be zero if the ‘lock intercept at zero’ option is selected). This app also outputs information that users might find necessary for plotting the trends that are displayed in the app: ‘SortSample…’ tab names show data sorted for each sample, while ‘CompiledSample…’ tab names show data sorted for each content value. ‘SortSampleNames’ shows the sample names sorted by increasing content for each nucleobase (columns in the order A-G-C-T), ‘SortSampleContent’ shows the sorted content, ‘SortSampleIntensities_mean’ shows the sorted mean intensities, and ‘SortSampleIntensities_std’ shows the sorted standard deviation of intensities. ‘CompiledSampleContent’ shows the sorted content values for each nucleobase (columns in the order A-G-C-T, samples that had equal content values combined together), ‘CompiledSampleIntensities_mean’ shows the sorted mean intensities, and ‘CompiledSampleIntensities_std’ shows the sorted standard deviation of intensities. Tabs called ‘LstdFits’ and ‘RstdFits’ are also included in the output. These are the left and right standard deviation linear fits, displayed as the green lines on the app. They are not used in the further analysis.
 
 App 4: Content Prediction ----------------------------------------
-* Note this app is only run on the gene blocks, not the calibration blocks
+Note this app is only run on the gene blocks, not the calibration blocks
 
 Inputs: There are two inputs for this app. The first input is the output from App 3. The second input is the output from App 2 (for gene blocks). The user must also specify the length of the blocks.
 
@@ -41,13 +51,3 @@ Inputs: There are several inputs and settings to adjust for this app. The first 
 •	Tracking level: This value specifies how many of the top genes are output.
 
 Outputs: This final diagnostics app outputs a text file, with filename ‘BOCS analysis – (database type) database.txt’. The file has multiple sections with data from the analysis. The ‘RUNTIME’ section displays how long the analysis took in minutes. The ‘SETTINGS’ section displays the user-defined settings. ‘BLOCKS_INPUT’ shows the blocks read into the app, with columns in the following order: block number, block length, permutations, content in the order A-G-C-T. ‘BLOCKS_ANALYZED’ shows the blocks (after entropy screening, if it is used) that were actually used in the analysis, with columns in the following order: block number, block length, permutations, content in the order A-G-C-T. ‘REM_GENES_SPECIFICITY’ shows block number, how many genes from the database remain after each block, and the calculated specificity. ‘CLASS’ shows the ranking of genes by sub-class (and the more broad class if the ‘resistance’ database type is used) for the top n gene sub-classes, where n is the tracking level. Columns are in the following order: block number, n unique sub-classes, combined scores for those n sub-classes, n unique classes, combined scores for those n classes. The ‘CS_ALL’ section displays the content score for each of the genes (one gene per row) in the database as each of the blocks is read (successive block scores in each consecutive column, where numbering starts at zero).
-
-Within the 'Sample FASTA databases' folder, there are four FASTA files available for running with App 5...
-1. The MEGARes antibiotic resistance database
-Lakin, S. M.; Dean, C.; Noyes, N. R.; Dettenwanger, A.; Ross, A. S.; Doster, E.; Rovira, P.; Abdo, Z.; Jones, K. L.; Ruiz, J.; et al. MEGARes: An Antimicrobial Resistance Database for High Throughput Sequencing. Nucleic Acids Res. 2017, 45 (D1), D574–D580.
-2. The COSMIC cancer database
-Forbes, S. A.; Beare, D.; Gunasekaran, P.; Leung, K.; Bindal, N.; Boutselakis, H.; Ding, M.; Bamford, S.; Cole, C.; Ward, S.; et al. COSMIC: Exploring the World’s Knowledge of Somatic Mutations in Human Cancer. Nucleic Acids Res. 2015, 43 (D1), D805–D811.
-3. A custom compiled database of other genetic diseases
-Inspired by the NIH Undiagnosed Diseases Network
-4. The Pseudomonas aeruginosa PAO1 genome (with an OXA class D beta-lactamase gene from the MEGARes database inserted)
-Stover, C. K.; Pham, X. Q.; Erwin, A. L.; Mizoguchi, S. D.; Warrener, P.; Hickey, M. J.; Brinkman, F. S. L.; Hufnagle, W. O.; Kowalik, D. J.; Lagrou, M.; et al. Complete Genome Sequence of Pseudomonas Aeruginosa PAO1, an Opportunistic Pathogen. Nature 2000, 406, 959–964.
