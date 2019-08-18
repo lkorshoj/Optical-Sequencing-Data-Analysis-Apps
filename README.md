@@ -8,7 +8,7 @@ Lakin, S. M.; Dean, C.; Noyes, N. R.; Dettenwanger, A.; Ross, A. S.; Doster, E.;
 Forbes, S. A.; Beare, D.; Gunasekaran, P.; Leung, K.; Bindal, N.; Boutselakis, H.; Ding, M.; Bamford, S.; Cole, C.; Ward, S.; et al. COSMIC: Exploring the World’s Knowledge of Somatic Mutations in Human Cancer. Nucleic Acids Res. 2015, 43 (D1), D805–D811.
 3. A custom compiled database of other genetic diseases<br />
 Inspired by the NIH Undiagnosed Diseases Network
-4. The Pseudomonas aeruginosa PAO1 genome (with an OXA class D beta-lactamase gene from the MEGARes database inserted)<br />
+4. The Pseudomonas aeruginosa PAO1 genome (with inserted OXA class D beta-lactamase gene from MEGARes)<br />
 Stover, C. K.; Pham, X. Q.; Erwin, A. L.; Mizoguchi, S. D.; Warrener, P.; Hickey, M. J.; Brinkman, F. S. L.; Hufnagle, W. O.; Kowalik, D. J.; Lagrou, M.; et al. Complete Genome Sequence of Pseudomonas Aeruginosa PAO1, an Opportunistic Pathogen. Nature 2000, 406, 959–964.
 
 Input/output requirements for using the apps are as follows...
